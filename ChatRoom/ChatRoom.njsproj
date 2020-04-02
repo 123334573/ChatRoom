@@ -31,6 +31,9 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="action.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="dist\app-bundle.js" />
     <Content Include="dist\app-bundle.js.map" />
     <Content Include="index.html">
@@ -48,6 +51,15 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="inputBox.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="message.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="tip.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

@@ -93,6 +93,8 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -106,8 +108,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+var tip_1 = __webpack_require__(/*! ./tip */ "./tip.tsx");
+var message_1 = __webpack_require__(/*! ./message */ "./message.tsx");
+var inputBox_1 = __webpack_require__(/*! ./inputBox */ "./inputBox.tsx");
 var ChatRoom = /** @class */ (function (_super) {
     __extends(ChatRoom, _super);
     function ChatRoom(props) {
@@ -121,10 +127,10 @@ var ChatRoom = /** @class */ (function (_super) {
             React.createElement("div", { className: "chat-Room-head" },
                 React.createElement("h1", null, "\u804A\u5929\u5BA4")),
             React.createElement("div", { className: "chat-Room-body" }, this.state.history.map(function (recoed) {
-                return recoed.isTip ? (React.createElement(Tip, { key: recoed.date, value: recoed.value })) : (React.createElement(Message, { key: recoed.date, isUser: recoed.isUser, value: recoed.value }));
+                return recoed.isTip ? (React.createElement(tip_1.default, { key: recoed.date, value: recoed.value })) : (React.createElement(message_1.default, { key: recoed.date, isUser: recoed.isUser, value: recoed.value }));
             })),
             React.createElement("div", { className: "chat-Room-foot" },
-                React.createElement(InputBox, { onSend: this.handleSend }))));
+                React.createElement(inputBox_1.default, { onSend: this.handleSend }))));
     };
     ChatRoom.prototype.handleSend = function (value) {
         var history = this.state.history;
@@ -136,54 +142,97 @@ var ChatRoom = /** @class */ (function (_super) {
     };
     return ChatRoom;
 }(React.Component));
+ReactDOM.render(React.createElement(ChatRoom, null), document.getElementById('root'));
+
+
+/***/ }),
+
+/***/ "./inputBox.tsx":
+/*!**********************!*\
+  !*** ./inputBox.tsx ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var InputBox = /** @class */ (function (_super) {
+    __extends(InputBox, _super);
+    function InputBox(props) {
+        var _this = _super.call(this, props) || this;
+        _this.myRef = React.createRef();
+        _this.handleClick = _this.handleClick.bind(_this);
+        return _this;
+    }
+    InputBox.prototype.render = function () {
+        return (React.createElement("div", null,
+            React.createElement("input", { type: "text", ref: this.myRef }),
+            React.createElement("button", { onClick: this.handleClick }, "\uFFFD\uFFFD\uFFFD\uFFFD")));
+    };
+    InputBox.prototype.handleClick = function (e) {
+        e.preventDefault();
+        var value = this.myRef.current.value.trim();
+        if (value) {
+            console.log(this.myRef);
+        }
+    };
+    return InputBox;
+}(React.Component));
+exports.default = InputBox;
+
+
+/***/ }),
+
+/***/ "./message.tsx":
+/*!*********************!*\
+  !*** ./message.tsx ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var Message = /** @class */ (function (_super) {
     __extends(Message, _super);
     function Message() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Message.prototype.render = function () {
-        return (React.createElement("div", { isUser: this.props.isUser }, this.props.value));
+        return (React.createElement("div", { style: { font: '20px' }, className: this.props.isUser.toString() }, this.props.value));
     };
     return Message;
 }(React.Component));
-var Tip = /** @class */ (function (_super) {
-    __extends(Tip, _super);
-    function Tip() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Tip.prototype.render = function () {
-        return (React.createElement("div", null, this.props.value));
-    };
-    return Tip;
-}(React.Component));
-var InputBox = /** @class */ (function (_super) {
-    __extends(InputBox, _super);
-    function InputBox(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = { text: '' };
-        _this.handleClick = _this.handleClick.bind(_this);
-        _this.handleChange = _this.handleChange.bind(_this);
-        return _this;
-    }
-    InputBox.prototype.render = function () {
-        return (React.createElement("div", null,
-            React.createElement("input", { type: "text", onChange: this.handleChange, value: this.state.text }),
-            React.createElement("button", { onClick: this.handleClick }, "\u53D1\u9001")));
-    };
-    InputBox.prototype.handleClick = function (e) {
-        e.preventDefault();
-        var value = this.state.text.trim();
-        if (value) {
-            this.props.onSend(value);
-            this.setState({ text: '' });
-        }
-    };
-    InputBox.prototype.handleChange = function (e) {
-        this.setState({ text: e.target.value });
-    };
-    return InputBox;
-}(React.Component));
-ReactDOM.render(React.createElement(ChatRoom, null), document.getElementById('root'));
+exports.default = Message;
 
 
 /***/ }),
@@ -32010,6 +32059,45 @@ if (false) {} else {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
+
+
+/***/ }),
+
+/***/ "./tip.tsx":
+/*!*****************!*\
+  !*** ./tip.tsx ***!
+  \*****************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var Tip = /** @class */ (function (_super) {
+    __extends(Tip, _super);
+    function Tip() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Tip.prototype.render = function () {
+        return (React.createElement("div", { style: { font: '10px' } }, this.props.value));
+    };
+    return Tip;
+}(React.Component));
+exports.default = Tip;
 
 
 /***/ })

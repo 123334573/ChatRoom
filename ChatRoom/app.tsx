@@ -3,6 +3,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+import Tip from './tip';
+import Message from './message';
+import InputBox from './inputBox';
+
 class ChatRoom extends React.Component {
     constructor(props) {
         super(props);
@@ -29,53 +33,6 @@ class ChatRoom extends React.Component {
                 isTip: false, isUser: true, value: value, date: new Date()
             }])
         });
-    }
-}
-
-class Message extends React.Component {
-    render() {
-        return (
-            <div isUser={this.props.isUser}>{this.props.value}</div>
-        );
-    }
-}
-
-class Tip extends React.Component {
-    render() {
-        return (
-            <div>{this.props.value}</div>
-        );
-    }
-}
-
-class InputBox extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { text: '' };
-
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-    render() {
-        return (
-            <div>
-                <input type="text" onChange={this.handleChange} value={this.state.text} />
-                <button onClick={this.handleClick}>发送</button>
-            </div>
-        );
-    }
-
-    handleClick(e) {
-        e.preventDefault();
-        var value = this.state.text.trim();
-        if (value) {
-            this.props.onSend(value);
-            this.setState({ text: '' });
-        }
-    }
-
-    handleChange(e) {
-        this.setState({ text: e.target.value });
     }
 }
 
