@@ -24,14 +24,14 @@ class InputBox extends React.Component {
         let input = this.myRef.current;
         let value = input.value.trim();
         if (value) {
-            this.props.onClick(value);
+            this.props.onSend(value);
         }
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onClick: (value) => {
+        onSend: (value) => {
             dispatch(sendMessage(value));
         }
     }

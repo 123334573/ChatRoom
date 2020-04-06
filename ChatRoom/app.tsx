@@ -18,9 +18,7 @@ class ChatRoom extends React.Component {
         return (
             <div className="chat-room">
                 <div className="chat-Room-head"><h1>聊天室</h1></div>
-                <div className="chat-Room-body">{this.state.history.map(recoed => {
-                    return recoed.isTip ? (<Tip key={recoed.date} value={recoed.value} />) : (<Message key={recoed.date} isUser={recoed.isUser} value={recoed.value} />);
-                })}</div>
+                <div className="chat-Room-body"></div>
                 <div className="chat-Room-foot"><InputBox onSend={this.handleSend} /></div>
             </div>
         );
